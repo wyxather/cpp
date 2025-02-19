@@ -1,14 +1,21 @@
 #pragma once
 
-#include "core/type/integral/def.hpp"
+#include <concepts>
+
 #include "core/type/integral/trait.hpp"
+#include "core/type/scalar/def.hpp"
 
 namespace core::type {
 
     template <trait::Integral T>
-    struct Character: Integral<T> {
+    struct Character: Scalar<T> {
     public:
-        using Integral<T>::Integral;
+        using Scalar<T>::Scalar;
+
+        template <trait::Integral U>
+        requires (!std::same_as<T, U>)
+        [[nodiscard]]
+        constexpr explicit operator U() const noexcept;
 
         [[nodiscard]]
         constexpr auto is_alphanumeric() const noexcept;

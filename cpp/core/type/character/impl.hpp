@@ -1,11 +1,19 @@
 #pragma once
 
 #include <cctype>
+#include <concepts>
 
 #include "core/type/integral/trait.hpp"
 #include "def.hpp"
 
 namespace core::type {
+
+    template <trait::Integral T>
+    template <trait::Integral U>
+    requires (!std::same_as<T, U>)
+    constexpr Character<T>::operator U() const noexcept {
+        return this->value;
+    }
 
     template <trait::Integral T>
     constexpr auto Character<T>::is_alphanumeric() const noexcept {
@@ -69,4 +77,4 @@ namespace core::type {
 
 } // namespace core::type
 
-#include "core/type/integral/impl.hpp"
+#include "core/type/scalar/impl.hpp"
