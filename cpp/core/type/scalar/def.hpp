@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core/cmp/eq/def.hpp"
 #include "core/convert/into/def.hpp"
 #include "core/convert/into/trait.hpp"
 #include "trait.hpp"
@@ -7,7 +8,7 @@
 namespace core::type {
 
     template <trait::Scalar T>
-    struct __declspec(empty_bases) Scalar: convert::Into<> {
+    struct __declspec(empty_bases) Scalar: cmp::Eq, convert::Into<> {
     public:
         Scalar() = default;
 
