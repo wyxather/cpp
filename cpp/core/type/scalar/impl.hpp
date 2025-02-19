@@ -36,4 +36,5 @@ namespace core::type {
 } // namespace core::type
 
 #include "core/cmp/eq/impl.hpp"
+#include "core/convert/as/impl.hpp"
 #include "core/convert/into/impl.hpp"
