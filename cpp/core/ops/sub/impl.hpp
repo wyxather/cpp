@@ -8,7 +8,8 @@ namespace core::ops {
     template <typename Rhs>
     template <typename Self, typename Other>
     constexpr auto Sub<Rhs>::sub(this const Self &self, const Other &other) noexcept
-    requires trait::Sub<Self, Other>
+        -> decltype(auto)
+    requires trait::Sub<decltype(self), decltype(other)>
     {
         return self - other;
     }

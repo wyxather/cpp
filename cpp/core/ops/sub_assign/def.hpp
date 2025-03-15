@@ -14,7 +14,11 @@ namespace core::ops {
             typename Other = std::conditional_t<std::is_void_v<Rhs>, Self, Rhs>>
         requires (!std::is_const_v<std::remove_reference_t<Self>>)
         constexpr auto sub_assign(this Self &&self, const Other &other) noexcept -> decltype(auto)
-        requires trait::SubAssign<Self, Other>;
+        requires trait::SubAssign<decltype(self), decltype(other)>;
+
+    protected:
+        SubAssign() = default;
+        ~SubAssign() = default;
     };
 
 } // namespace core::ops

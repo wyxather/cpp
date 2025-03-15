@@ -6,8 +6,8 @@
 namespace core::ops {
 
     template <typename Self>
-    constexpr auto Neg::neg(this const Self &self) noexcept
-    requires trait::Neg<Self>
+    constexpr auto Neg::neg(this const Self &self) noexcept -> decltype(auto)
+    requires trait::Neg<decltype(self)>
     {
         return -self;
     }

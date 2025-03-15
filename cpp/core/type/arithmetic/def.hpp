@@ -12,14 +12,14 @@
 #include "core/ops/rem_assign/def.hpp"
 #include "core/ops/sub/def.hpp"
 #include "core/ops/sub_assign/def.hpp"
-#include "core/type/numeric/def.hpp"
+#include "core/type/scalar/def.hpp"
 #include "trait.hpp"
 
 namespace core::type {
 
     template <trait::Arithmetic T>
     struct Arithmetic:
-        Numeric<T>,
+        Scalar<T>,
         ops::Add<>,
         ops::AddAssign<>,
         ops::Sub<>,
@@ -31,7 +31,7 @@ namespace core::type {
         ops::Rem<>,
         ops::RemAssign<> {
     public:
-        using Numeric<T>::Numeric;
+        using Scalar<T>::Scalar;
 
         template <typename Self>
         [[nodiscard]]

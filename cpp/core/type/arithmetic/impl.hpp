@@ -127,4 +127,4 @@ namespace core::type {
 #include "core/ops/rem_assign/impl.hpp"
 #include "core/ops/sub/impl.hpp"
 #include "core/ops/sub_assign/impl.hpp"
-#include "core/type/numeric/impl.hpp"
+#include "core/type/scalar/impl.hpp"

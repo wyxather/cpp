@@ -9,9 +9,13 @@
 namespace core::type {
 
     template <trait::Scalar T>
+    Scalar(T) -> Scalar<T>;
+
+    template <trait::Scalar T>
     template <typename U>
-    requires convert::trait::Into<U, T>
-    constexpr Scalar<T>::Scalar(const U &value) noexcept: value { static_cast<T>(value) } {}
+    constexpr Scalar<T>::Scalar(const U &value) noexcept
+    requires convert::trait::Into<decltype(value), T>
+        : value { static_cast<T>(value) } {}
 
     template <trait::Scalar T>
     constexpr Scalar<T>::operator T &() & noexcept {
@@ -36,5 +40,4 @@ namespace core::type {
 } // namespace core::type
 
 #include "core/cmp/eq/impl.hpp"
-#include "core/convert/as/impl.hpp"
 #include "core/convert/into/impl.hpp"

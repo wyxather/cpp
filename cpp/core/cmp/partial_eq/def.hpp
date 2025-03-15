@@ -18,14 +18,18 @@ namespace core::cmp {
             typename Other = std::conditional_t<std::is_void_v<Rhs>, Self, Rhs>>
         [[nodiscard]]
         constexpr auto eq(this const Self &self, const Other &other) noexcept
-        requires trait::PartialEq<Self, Other>;
+        requires trait::PartialEq<decltype(self), decltype(other)>;
 
         template <
             typename Self,
             typename Other = std::conditional_t<std::is_void_v<Rhs>, Self, Rhs>>
         [[nodiscard]]
         constexpr auto ne(this const Self &self, const Other &other) noexcept
-        requires trait::PartialEq<Self, Other>;
+        requires trait::PartialEq<decltype(self), decltype(other)>;
+
+    protected:
+        PartialEq() = default;
+        ~PartialEq() = default;
     };
 
 } // namespace core::cmp

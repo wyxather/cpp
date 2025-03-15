@@ -4,6 +4,10 @@
 
 namespace core::cmp {
 
-    struct Eq: PartialEq<> {};
+    struct Eq: PartialEq<> {
+    protected:
+        Eq() = default;
+        ~Eq() = default;
+    };
 
 } // namespace core::cmp

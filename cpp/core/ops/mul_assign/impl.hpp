@@ -12,9 +12,9 @@ namespace core::ops {
     requires (!std::is_const_v<std::remove_reference_t<Self>>)
     constexpr auto MulAssign<Rhs>::mul_assign(this Self &&self, const Other &other) noexcept
         -> decltype(auto)
-    requires trait::MulAssign<Self, Other>
+    requires trait::MulAssign<decltype(self), decltype(other)>
     {
-        return self *= other;
+        return std::forward<Self>(self) *= other;
     }
 
 } // namespace core::ops

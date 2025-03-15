@@ -13,8 +13,12 @@ namespace core::ops {
             typename Self,
             typename Other = std::conditional_t<std::is_void_v<Rhs>, Self, Rhs>>
         [[nodiscard]]
-        constexpr auto div(this const Self &self, const Other &other) noexcept
-        requires trait::Div<Self, Other>;
+        constexpr auto div(this const Self &self, const Other &other) noexcept -> decltype(auto)
+        requires trait::Div<decltype(self), decltype(other)>;
+
+    protected:
+        Div() = default;
+        ~Div() = default;
     };
 
 } // namespace core::ops

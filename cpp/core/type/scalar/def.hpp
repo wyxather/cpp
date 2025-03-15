@@ -1,7 +1,6 @@
 #pragma once
 
 #include "core/cmp/eq/def.hpp"
-#include "core/convert/as/def.hpp"
 #include "core/convert/into/def.hpp"
 #include "core/convert/into/trait.hpp"
 #include "trait.hpp"
@@ -9,13 +8,13 @@
 namespace core::type {
 
     template <trait::Scalar T>
-    struct __declspec(empty_bases) Scalar: cmp::Eq, convert::Into<>, convert::As<> {
+    struct __declspec(empty_bases) Scalar: convert::Into<>, cmp::Eq {
     public:
         Scalar() = default;
 
         template <typename U>
-        requires convert::trait::Into<U, T>
-        constexpr Scalar(const U &value) noexcept;
+        constexpr Scalar(const U &value) noexcept
+        requires convert::trait::Into<decltype(value), T>;
 
         [[nodiscard]]
         constexpr explicit operator T &() & noexcept;

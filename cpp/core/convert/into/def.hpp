@@ -12,7 +12,11 @@ namespace core::convert {
         template <std::same_as<T> Other = T, typename Self>
         [[nodiscard]]
         constexpr auto into(this Self &&self) noexcept -> Other
-        requires trait::Into<Self, Other>;
+        requires trait::Into<decltype(self), Other>;
+
+    protected:
+        Into() = default;
+        ~Into() = default;
     };
 
     template <>
@@ -21,7 +25,11 @@ namespace core::convert {
         template <typename Other, typename Self>
         [[nodiscard]]
         constexpr auto into(this Self &&self) noexcept -> Other
-        requires trait::Into<Self, Other>;
+        requires trait::Into<decltype(self), Other>;
+
+    protected:
+        Into() = default;
+        ~Into() = default;
     };
 
 } // namespace core::convert
